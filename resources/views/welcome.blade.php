@@ -58,7 +58,7 @@
                                              
                                             <div class="form-group">
                                                 <div class="col-md-8 col-md-offset-4">
-                                                     <a onclick="" class="btn btn-primary">
+                                                     <a onclick="generateCode();" class="btn btn-primary">
                                                         Generagte Code
                                                     </a>
                                                     <span id="form_output"></span>
@@ -109,10 +109,46 @@
         <hr>
         
 <script type="text/javascript">
-  function setDiscount(){
+//function to generate voucher code
+function generateCode(){
+    // Cariables to need to send to route (Web.php file)
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var uName = $("#u_name").val();
+    var emailAdd = $("#emailAddress").val();
+    var offerType = $("#Offer_Type").val();
+    var fDiscount = $("#FixedPercentageDiscount").val();
+    // Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    var url = "post_Generaate_Code";
+
+     var vars = "_token="+CSRF_TOKEN+"&Name="+uName+"&Email="+emailAdd+"&offerType="+offerType+"&fDiscount="+fDiscount;
+   
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+      if(hr.readyState == 4 && hr.status == 200) {
+        var return_data = JSON.parse(hr.responseText);
+            if(return_data.name){
+
+           }else{
+            
+           }
+    }
+}
+// Send the data to to route (Web.php file).. and wait for response to update the form_output div message
+     hr.send(vars); // Execute the request
+     $("#form_output").fadeIn(100);
+     $('#form_output').html('<hr><div class="alert alert-success">Generating Voucher Code, please waite.......</div>');
+
+}
+
+//function to view and set the Fixed Percentage Discount
+function setDiscount(){
     var offerType = $("#Offer_Type").val();
     if(offerType == "SpecialOffer"){
-        $('#percentagediscount').html('<div class="form-group"><label for="name" class="col-md-4 control-label">Fixed Percentage Discount</label><div class="col-md-6"><input  type="number" class="form-control" id="emailAddress" placeholder="Fixed Percentage Discount" required autofocus><span id="FixedPercentageDiscount"></span></div><br><br></div>');
+        $('#percentagediscount').html('<div class="form-group"><label for="name" class="col-md-4 control-label">Fixed Percentage Discount</label><div class="col-md-6"><input  type="number" class="form-control" id="FixedPercentageDiscount" placeholder="Fixed Percentage Discount" required autofocus><span id="FixedDiscountMessage"></span></div><br><br></div>');
     }else{
       $('#percentagediscount').html('');
     }
