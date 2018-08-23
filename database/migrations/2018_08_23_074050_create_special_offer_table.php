@@ -15,7 +15,7 @@ class CreateSpecialOfferTable extends Migration
     {
         Schema::create('special_offer', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nameID');
+            $table->string('recipientID');
             $table->decimal('percentageDiscount');
             $table->timestamps();
         });
