@@ -115,13 +115,13 @@ function generateCode(){
     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
     var uName = $("#u_name").val();
     var emailAdd = $("#emailAddress").val();
-    var offerType = $("#Offer_Type").val();
+    var offer_Type = $("#Offer_Type").val();
     var fDiscount = $("#FixedPercentageDiscount").val();
     // Create our XMLHttpRequest object
     var hr = new XMLHttpRequest();
     var url = "post_Generaate_Code";
 
-     var vars = "_token="+CSRF_TOKEN+"&Name="+uName+"&Email="+emailAdd+"&offerType="+offerType+"&fDiscount="+fDiscount;
+     var vars = "_token="+CSRF_TOKEN+"&Name="+uName+"&Email="+emailAdd+"&offerType="+offer_Type+"&fDiscount="+fDiscount;
    
     hr.open("POST", url, true);
     // Set content type header information for sending url encoded variables in the request
@@ -130,17 +130,31 @@ function generateCode(){
     hr.onreadystatechange = function() {
       if(hr.readyState == 4 && hr.status == 200) {
         var return_data = JSON.parse(hr.responseText);
-            if(return_data.name){
+        console.log(return_data);
+        console.log(return_data.recipientID);
+        console.log(return_data['recipientID']);
 
+            if(return_data.recipientID){
+                $('#form_output').html('<hr><div class="alert alert-success">Code Generated Successful</div>');
+                $("#u_name").val('');
+                $("#emailAddress").val('');
+                $("#Offer_Type").val('');
+                $("#form_output").fadeOut(9000);
+           }else if(return_data.emailexists){
+                $('#form_output').html('<hr><div class="alert alert-danger">'+return_data.message+'</div>');
            }else{
-            
+                $('#form_output').html('<hr><div class="alert alert-danger">'+return_data.error.Name+'<br>'+return_data.error.Email+'<br>'+return_data.error.offerType+'</div>');
            }
+
+    }else{
+        // var return_data = JSON.parse(hr.responseText);
+        // console.log(return_data);
     }
 }
 // Send the data to to route (Web.php file).. and wait for response to update the form_output div message
      hr.send(vars); // Execute the request
      $("#form_output").fadeIn(100);
-     $('#form_output').html('<hr><div class="alert alert-success">Generating Voucher Code, please waite.......</div>');
+     $('#form_output').html('<hr><div class="alert alert-warning">Generating Voucher Code, please waite.......</div>');
 
 }
 

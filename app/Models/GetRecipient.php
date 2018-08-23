@@ -13,7 +13,7 @@ class GetRecipient extends Model
     protected $table = 'recipient';
 
     protected $fillable = [
-        'name', 'email','created_at','updated_at'
+        'name', 'email','created_at','created_at','updated_at'
     ];
 
     /**

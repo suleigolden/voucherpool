@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Generate New Voucher Code
+Route::post('/post_Generaate_Code','voucherController@generateVoucherCode');

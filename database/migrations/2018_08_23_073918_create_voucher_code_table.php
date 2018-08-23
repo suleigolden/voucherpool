@@ -16,10 +16,10 @@ class CreateVoucherCodeTable extends Migration
         Schema::create('voucher_code', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('recipientID')->unsigned();
-            $table->string('recipientType',10);
+            $table->string('recipientType',50);
             $table->string('code');
-            $table->date('expiration');
-            $table->date('date_of_usage');
+            $table->string('expiration',30);
+            $table->string('date_of_usage',30);
             $table->timestamps();
         });
     }
