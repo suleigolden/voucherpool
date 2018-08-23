@@ -45,7 +45,7 @@
                                             <div class="form-group">
                                                 <label for="name" class="col-md-4 control-label">Offer Type</label>
                                                 <div class="col-md-6">
-                                                <select  id="Offer_Type" class="form-control">
+                                                <select  id="Offer_Type" class="form-control" onchange="setDiscount();">
                                                    <option value="">Select Offer</option>
                                                    <option value="NormalOffer">Normal Offer</option>
                                                    <option value="SpecialOffer">Special Offer</option>
@@ -53,7 +53,8 @@
                                                 <span id="errorgender_dent"></span>
                                                 </div><br><br>
                                             </div>
-                                            
+                                            <div id="percentagediscount">
+                                            </div>
                                              
                                             <div class="form-group">
                                                 <div class="col-md-8 col-md-offset-4">
@@ -107,7 +108,16 @@
         </div>
         <hr>
         
-
+<script type="text/javascript">
+  function setDiscount(){
+    var offerType = $("#Offer_Type").val();
+    if(offerType == "SpecialOffer"){
+        $('#percentagediscount').html('<div class="form-group"><label for="name" class="col-md-4 control-label">Fixed Percentage Discount</label><div class="col-md-6"><input  type="number" class="form-control" id="emailAddress" placeholder="Fixed Percentage Discount" required autofocus><span id="FixedPercentageDiscount"></span></div><br><br></div>');
+    }else{
+      $('#percentagediscount').html('');
+    }
+  }
+</script>
 
         <!-- Footer -->
         @include('pageLinks.footer')
