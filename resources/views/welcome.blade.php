@@ -143,7 +143,9 @@ function generateCode(){
            }else if(return_data.emailexists){
                 $('#form_output').html('<hr><div class="alert alert-danger">'+return_data.message+'</div>');
            }else{
-                $('#form_output').html('<hr><div class="alert alert-danger">'+return_data.error.Name+'<br>'+return_data.error.Email+'<br>'+return_data.error.offerType+'</div>');
+            checkValidation(return_data.error.Name);
+            checkValidation(return_data.error.Email);
+            checkValidation(return_data.error.offerType);
            }
 
     }else{
@@ -167,6 +169,15 @@ function setDiscount(){
       $('#percentagediscount').html('');
     }
   }
+//Check Input field validations
+function checkValidation(value){
+    if (value) {
+        $('#form_output').append('<div class="alert alert-danger">'+value+'</div>');
+         return false;
+     }else{
+        return true;
+    } 
+}
 </script>
 
         <!-- Footer -->
