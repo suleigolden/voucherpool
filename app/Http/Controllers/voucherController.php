@@ -82,7 +82,7 @@ class voucherController extends Controller
 	    	$postSpecialOffer ->percentageDiscount = $request->fDiscount;
 	    	$postSpecialOffer ->save();
 	    	$recipient = GetRecipient::where('email', '=', $request->Email)
-     ->join('special_offer', 'recipient.recipientID', '=', 'special_offer.recipientID')->first();
+     ->join('voucher_code', 'recipient.recipientID', '=', 'voucher_code.recipientID')->first();
 
          return json_encode($recipient);
 	     }else{
