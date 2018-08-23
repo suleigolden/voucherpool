@@ -96,7 +96,21 @@
                                         </tr>
                                     </thead>
                                     <tbody id="resultOutPut">
+                                        @foreach($recipients as $recipient)
+                                        <tr id="updateRec{{ $recipient->recipientID }}">
+                                        <th>{{ $recipient->name }}</th>
+                                        <th>{{ $recipient->email }}</th>
+                                        <th>{{ $recipient->recipientType }}</th>
+                                        <th>{{ $recipient->code }}</th>
+                                            @if($recipient->date_of_usage == " ")
+                                                <th><i class="fa fa-close" style="color:#F00;"></i></th>
+                                            @else
+                                                <th><i class="fa fa-check" style="color:green;"></i></th>
+                                            @endif
                                         
+                                        <th>{{ $recipient->date_of_usage }}</th>
+                                        </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>

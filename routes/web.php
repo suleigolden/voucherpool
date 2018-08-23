@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//view all the voucher pool
+Route::get('/','voucherController@generateAllVoucherPool');
 
 //Generate New Voucher Code
 Route::post('/post_Generaate_Code','voucherController@generateVoucherCode');

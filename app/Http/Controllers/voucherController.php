@@ -13,7 +13,16 @@ use Validator;
 
 class voucherController extends Controller
 {
-    
+     /**
+     * function to retrieve and return all the voucher code
+     */
+    public function generateAllVoucherPool(){
+    	 $recipients = GetRecipient::join('voucher_code', 'recipient.recipientID', '=', 'voucher_code.recipientID')
+    	 //->join('special_offer', 'recipient.recipientID', '=', 'special_offer.recipientID')
+    	 ->get();
+
+    	 return view('welcome', compact('recipients'));
+    }
     /**
      * function to generate new voucher code and Save It
      */
