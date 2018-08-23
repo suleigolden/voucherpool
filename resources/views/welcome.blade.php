@@ -95,7 +95,7 @@
                                             <th>Date Used</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="resultOutPut">
                                         
 
                                     </tbody>
@@ -130,12 +130,13 @@ function generateCode(){
     hr.onreadystatechange = function() {
       if(hr.readyState == 4 && hr.status == 200) {
         var return_data = JSON.parse(hr.responseText);
-        console.log(return_data);
-        console.log(return_data.recipientID);
-        console.log(return_data['recipientID']);
+        // console.log(return_data);
+        // console.log(return_data.recipientID);
+        // console.log(return_data['recipientID']);
 
             if(return_data.recipientID){
                 $('#form_output').html('<hr><div class="alert alert-success">Code Generated Successful</div>');
+                $("#resultOutPut").prepend('<tr id="updateRec'+return_data.recipientID+'"> <th>'+return_data.name+'</th><th>'+return_data.email+'</th><th>'+return_data.recipientType+'</th><th>'+return_data.code+'</th><th><i class="fa fa-close" style="color:#F00;"></i></th><th>'+return_data.date_of_usage+'</th></tr>');
                 $("#u_name").val('');
                 $("#emailAddress").val('');
                 $("#Offer_Type").val('');
