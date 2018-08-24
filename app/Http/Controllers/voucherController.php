@@ -107,7 +107,7 @@ class voucherController extends Controller
      */
     function getCode($length = 8){
 
-    $randomCode = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+    $randomCode = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
     return substr(str_shuffle(str_repeat($randomCode, $length)), 0, $length);
     }
