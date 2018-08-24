@@ -17,6 +17,7 @@
         </div>
         <!-- /.row -->
        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal_1"><i class="fa fa-edit"></i> Generate New Voucher</button>
+       <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal_verify"><i class="fa fa-edit"></i> Ferify Voucher</button>
        <br><br>
                         <div class="modal fade" id="myModal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -76,6 +77,51 @@
                                 
                             </div>
 
+                            <div class="modal fade" id="myModal_verify" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">Verify Voucher Code</h4>
+                                        </div>
+                                        <div class="panel-body">
+                                             <div class="form-group">
+                                                <label for="name" class="col-md-4 control-label">Name</label>
+
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control" id="u_name" placeholder="Name"   required autofocus>
+                                                <span id="errorf_name"></span>
+                                                </div><br><br>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-md-4 control-label">Email</label>
+
+                                                <div class="col-md-6">
+                                                    <input  type="text" class="form-control" id="emailAddress" placeholder="Email Address"   required autofocus>
+                                                 <span id="errorl_email"></span>
+                                                </div><br><br>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <div class="col-md-8 col-md-offset-4">
+                                                     <a onclick="verifyvouvherCode();" class="btn btn-primary">
+                                                        Verify Code
+                                                    </a>
+                                                    <span id="form_output"></span>
+                                                </div>
+                                            </div>
+                                            <div class="writeinfo"></div> 
+                                    </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                         
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                
+                            </div>
+
 
         <div class="row">
             <div class="panel panel-default">
@@ -103,9 +149,9 @@
                                         <th>{{ $recipient->recipientType }}</th>
                                         <th>{{ $recipient->code }}</th>
                                             @if($recipient->date_of_usage == " ")
-                                                <th><i class="fa fa-close" style="color:#F00;"></i></th>
+                                                <th><label class="btn btn-danger"><i class="fa fa-close"></i></label></th>
                                             @else
-                                                <th><i class="fa fa-check" style="color:green;"></i></th>
+                                                <th><label class="btn btn-success"><i class="fa fa-check"></i></label></th>
                                             @endif
                                         
                                         <th>{{ $recipient->date_of_usage }}</th>
@@ -150,7 +196,7 @@ function generateCode(){
 
             if(return_data.recipientID){
                 $('#form_output').html('<hr><div class="alert alert-success">Code Generated Successful</div>');
-                $("#resultOutPut").prepend('<tr id="updateRec'+return_data.recipientID+'"> <th>'+return_data.name+'</th><th>'+return_data.email+'</th><th>'+return_data.recipientType+'</th><th>'+return_data.code+'</th><th><i class="fa fa-close" style="color:#F00;"></i></th><th>'+return_data.date_of_usage+'</th></tr>');
+                $("#resultOutPut").prepend('<tr id="updateRec'+return_data.recipientID+'"> <th>'+return_data.name+'</th><th>'+return_data.email+'</th><th>'+return_data.recipientType+'</th><th>'+return_data.code+'</th><th><label class="btn btn-danger"><i class="fa fa-close"></i></label></th><th>'+return_data.date_of_usage+'</th></tr>');
                 $("#u_name").val('');
                 $("#emailAddress").val('');
                 $("#Offer_Type").val('');
