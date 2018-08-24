@@ -107,7 +107,7 @@
                                                      <a onclick="verifyvouvherCode();" class="btn btn-primary">
                                                         Verify Code
                                                     </a>
-                                                    <span id="form_output"></span>
+                                                    <span id="vform_output"></span>
                                                 </div>
                                             </div>
                                             <div class="writeinfo"></div> 
@@ -204,9 +204,9 @@ function generateCode(){
            }else if(return_data.emailexists){
                 $('#form_output').html('<hr><div class="alert alert-danger">'+return_data.message+'</div>');
            }else{
-            checkValidation(return_data.error.Name);
-            checkValidation(return_data.error.Email);
-            checkValidation(return_data.error.offerType);
+            checkValidation(return_data.error.Name,"form_output");
+            checkValidation(return_data.error.Email,"form_output");
+            checkValidation(return_data.error.offerType,"form_output");
            }
 
     }else{
@@ -231,9 +231,9 @@ function setDiscount(){
     }
   }
 //Check Input field validations
-function checkValidation(value){
+function checkValidation(value,form_output){
     if (value) {
-        $('#form_output').append('<div class="alert alert-danger">'+value+'</div>');
+        $('#'+form_output).append('<div class="alert alert-danger">'+value+'</div>');
          return false;
      }else{
         return true;
@@ -261,11 +261,20 @@ function verifyvouvherCode(){
         // console.log(return_data);
         // console.log(return_data.recipientID);
         // console.log(return_data['recipientID']);
-
+        if(return_data.emailexists){
+                $('#vform_output').html('<hr><div class="alert alert-danger">'+return_data.message+'</div>');
+           }else if(return_data.codeexists){
+                $('#vform_output').html('<hr><div class="alert alert-danger">'+return_data.message+'</div>');
+           }else if(return_data.ValidateTrue){
+                $('#vform_output').html('<hr><div class="alert alert-success">'+return_data.message+'</div>');
+           }else{
+            checkValidation(return_data.error.VoucherCode,"vform_output");
+            checkValidation(return_data.error.Email,"vform_output");
+           }
           
     }
 }
-// Send the data to to route (Web.php file).. and wait for response to update the form_output div message
+// Send the data to to route (Web.php file).. and wait for response to update the vform_output div message
      hr.send(vars); // Execute the request
      $("#vform_output").fadeIn(100);
      $('#vform_output').html('<hr><div class="alert alert-warning">Verifying Voucher Code, please waite.......</div>');

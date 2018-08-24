@@ -20,3 +20,6 @@ Route::get('/','voucherController@generateAllVoucherPool');
 
 //Generate New Voucher Code
 Route::post('/post_Generaate_Code','voucherController@generateVoucherCode');
+
+//Verify Voucher Code
+Route::post('/post_Verify_voucher_Code','voucherController@verifyVoucherCode');
