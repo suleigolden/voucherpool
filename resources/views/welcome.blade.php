@@ -16,8 +16,22 @@
             </div>
         </div>
         <!-- /.row -->
+        <div class="col-md-4">
        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal_1"><i class="fa fa-plus"></i> Generate New Voucher</button>
        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal_verify"><i class="fa fa-edit"></i> Ferify Voucher</button>
+       </div>
+       <div class="col-md-5">
+            <div class="col-md-6">
+           <input type="text" class="form-control" id="v_Email" placeholder="Email"   required autofocus>
+            
+<span id="sform_output"></span>
+            </div>
+            <button type="button" class="btn btn-success" onclick="searchVoucher();"><i class="fa fa-search"></i> Search Voucher</button>
+            
+      </div>
+      <div class="col-md-2">
+        <a href="{{ URL('/') }}" class="btn btn-success"><i class="fa fa-search"></i> View all Voucher</a>
+      </div>
        <br><br>
                         <div class="modal fade" id="myModal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -86,7 +100,7 @@
                                         </div>
                                         <div class="panel-body">
                                              <div class="form-group">
-                                                <label for="name" class="col-md-4 control-label">Name</label>
+                                                <label for="name" class="col-md-4 control-label">Voucher Code</label>
 
                                                 <div class="col-md-6">
                                                     <input type="text" class="form-control" id="v_Code" placeholder="Voucher Code"   required autofocus>
@@ -278,6 +292,43 @@ function verifyvouvherCode(){
      hr.send(vars); // Execute the request
      $("#vform_output").fadeIn(100);
      $('#vform_output').html('<hr><div class="alert alert-warning">Verifying Voucher Code, please waite.......</div>');
+
+}
+//function to search for voucher using email
+function searchVoucher(){
+    // Cariables to need to send to route (Web.php file)
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var emailAdd = $("#v_Email").val();
+    // Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    var url = "post_Search_voucher_Code";
+
+     var vars = "_token="+CSRF_TOKEN+"&Email="+emailAdd;
+   
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+      if(hr.readyState == 4 && hr.status == 200) {
+        var return_data = JSON.parse(hr.responseText);
+        if(return_data.recipientID){
+                $('#sform_output').html('');
+                $("#resultOutPut").html('<tr id="updateRec'+return_data.recipientID+'"> <th>'+return_data.name+'</th><th>'+return_data.email+'</th><th>'+return_data.recipientType+'</th><th>'+return_data.code+'</th><th><label class="btn btn-danger"><i class="fa fa-close"></i></label></th><th>'+return_data.date_of_usage+'</th></tr>');
+                $("#u_name").val('');
+                $("#emailAddress").val('');
+                $("#Offer_Type").val('');
+                $("#form_output").fadeOut(9000);
+           }else{
+            $('#sform_output').html('<i style="color:#F00;">Invalid Email</i>');
+           }
+        
+    }
+}
+// Send the data to to route (Web.php file).. and wait for response to update the vform_output div message
+     hr.send(vars); // Execute the request
+     $("#sform_output").fadeIn(100);
+     $('#sform_output').html('<i style="color:green;">Searching...</i>');
 
 }
 </script>

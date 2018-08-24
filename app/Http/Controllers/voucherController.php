@@ -216,4 +216,24 @@ class voucherController extends Controller
         }
   }
 
+	/**
+     * function to search for voucher code using email
+    */
+public function searchVoucherCode(Request $request){
+
+	if (GetRecipient::where('email', '=', $request->Email)->exists()) {
+ 		  $recipient = GetRecipient::where('email', '=', $request->Email)
+    	 ->join('voucher_code', 'recipient.recipientID', '=', 'voucher_code.recipientID')
+         ->first();
+
+         return json_encode($recipient);
+     }else{
+     	$post = array('emailexists' => "true",
+     					 'message' => "" 
+     					); 
+    			return response()->json($post);
+     }
+
+}
+
 }

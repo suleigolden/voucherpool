@@ -23,3 +23,8 @@ Route::post('/post_Generaate_Code','voucherController@generateVoucherCode');
 
 //Verify Voucher Code
 Route::post('/post_Verify_voucher_Code','voucherController@verifyVoucherCode');
+
+//Search for Voucher Code
+Route::post('/post_Search_voucher_Code','voucherController@searchVoucherCode');
+
+
