@@ -22,7 +22,7 @@ This is PHP development task for VanHack. It is developed using Laravel 5.6, Boo
 ## Generate New Voucher
 	
 	- 1. click on Generate New Voucher yellow button for a pop up box to display.
-	- i>2. Type in the Name and the Email in the fields.
+	- 2. Type in the Name and the Email in the fields.
 	- 3. Select Offer Type and set the Fixed Percentage Discount.
 	- 4. Click on Generate Code blue button.
 	- 5. NOTE: All fields are mandatory and after submitting them a new voucher code is created in the database.
@@ -44,7 +44,7 @@ This is PHP development task for VanHack. It is developed using Laravel 5.6, Boo
 	
 	This application is tested using phpunit for testing, and Postman.
 
-	## Live Demo
+## Live Demo
 
 	You can view the live demo via this link on my blog page
 	https://thelastcodebender.com/voucher
