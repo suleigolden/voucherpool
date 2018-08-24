@@ -16,7 +16,7 @@
             </div>
         </div>
         <!-- /.row -->
-       <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal_1"><i class="fa fa-edit"></i> Generate New Voucher</button>
+       <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal_1"><i class="fa fa-plus"></i> Generate New Voucher</button>
        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal_verify"><i class="fa fa-edit"></i> Ferify Voucher</button>
        <br><br>
                         <div class="modal fade" id="myModal_1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -89,15 +89,15 @@
                                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                                 <div class="col-md-6">
-                                                    <input type="text" class="form-control" id="u_name" placeholder="Name"   required autofocus>
-                                                <span id="errorf_name"></span>
+                                                    <input type="text" class="form-control" id="v_Code" placeholder="Voucher Code"   required autofocus>
+                                                <span id="errorf_code"></span>
                                                 </div><br><br>
                                             </div>
                                             <div class="form-group">
                                                 <label for="name" class="col-md-4 control-label">Email</label>
 
                                                 <div class="col-md-6">
-                                                    <input  type="text" class="form-control" id="emailAddress" placeholder="Email Address"   required autofocus>
+                                                    <input  type="text" class="form-control" id="vemailAddress" placeholder="Email Address"   required autofocus>
                                                  <span id="errorl_email"></span>
                                                 </div><br><br>
                                             </div>
@@ -238,6 +238,38 @@ function checkValidation(value){
      }else{
         return true;
     } 
+}
+//function to verify voucher code via HTTP
+function verifyvouvherCode(){
+    // Cariables to need to send to route (Web.php file)
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    var uCode = $("#v_Code").val();
+    var emailAdd = $("#vemailAddress").val();
+    // Create our XMLHttpRequest object
+    var hr = new XMLHttpRequest();
+    var url = "post_Verify_voucher_Code";
+
+     var vars = "_token="+CSRF_TOKEN+"&VoucherCode="+uCode+"&Email="+emailAdd;
+   
+    hr.open("POST", url, true);
+    // Set content type header information for sending url encoded variables in the request
+    hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // Access the onreadystatechange event for the XMLHttpRequest object
+    hr.onreadystatechange = function() {
+      if(hr.readyState == 4 && hr.status == 200) {
+        var return_data = JSON.parse(hr.responseText);
+        // console.log(return_data);
+        // console.log(return_data.recipientID);
+        // console.log(return_data['recipientID']);
+
+          
+    }
+}
+// Send the data to to route (Web.php file).. and wait for response to update the form_output div message
+     hr.send(vars); // Execute the request
+     $("#vform_output").fadeIn(100);
+     $('#vform_output').html('<hr><div class="alert alert-warning">Verifying Voucher Code, please waite.......</div>');
+
 }
 </script>
 
