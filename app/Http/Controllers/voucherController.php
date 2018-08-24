@@ -181,7 +181,7 @@ class voucherController extends Controller
 				         ->where('code', '=', $request->VoucherCode)
 						 ->update(['date_of_usage'=> $todayDate]);
 				        $postMessage = array('ValidateTrue' => "true",
-	     					 'message' => "This customer has ".$OfferType."-".$getdateOfexpiration." and Percentage Discount is <strong>$".$PercentageDiscount."</strong>."  
+	     					 'message' => "This customer has ".$OfferType." and Percentage Discount is <strong>$".$PercentageDiscount."</strong>."  
 	     					);
 	     				return response()->json($postMessage); 
 				     }else{
