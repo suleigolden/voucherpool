@@ -21,30 +21,30 @@ This is PHP development task for VanHack. It is developed using Laravel 5.6, Boo
 
 ## Generate New Voucher
 	
-	<ul>
-		<li>1. click on Generate New Voucher yellow button for a pop up box to display.</li>
-		<li>2. Type in the Name and the Email in the fields.</li>
-		<li>3. Select Offer Type and set the Fixed Percentage Discount.</li>
-		<li>4. Click on Generate Code blue button.</li>
-		<li>5. NOTE: All fields are mandatory and after submitting them a new voucher code is created in the database.</li>
-	</ul>
+	- 1. click on Generate New Voucher yellow button for a pop up box to display.
+	- i>2. Type in the Name and the Email in the fields.
+	- 3. Select Offer Type and set the Fixed Percentage Discount.
+	- 4. Click on Generate Code blue button.
+	- 5. NOTE: All fields are mandatory and after submitting them a new voucher code is created in the database.
+	
 ## Verify Voucher Code
 	
-	<ul>
-		<li>1. click on Verify Voucher green button for a pop up box to display.</li>
-		<li>2. Type in the Name and the Email in the fields.</li>
-		<li>3. Click on Verify Code blue button.</li>
-		<li>4. NOTE: All fields are mandatory</li>
-	</ul>
+	- 1. click on Verify Voucher green button for a pop up box to display.
+	- 2. Type in the Name and the Email in the fields.
+	- 3. Click on Verify Code blue button.
+	- 4. NOTE: All fields are mandatory.
+	
 ## Search Voucher Code Using Email Address
 	
-	<ul>
-		<li>1. Type in the Email in the search email field.</li>
-		<li>2. Click on search voucher green button to view the result.</li>
-	</ul>
+	- 1. Type in the Email in the search email field.
+	- 2. Click on search voucher green button to view the result.
+	
 
 ## Testing
 	
-	<p>This application is tested using phpunit for testing, and in Postman.</p>
+	This application is tested using phpunit for testing, and Postman.
 
-	
+	## Live Demo
+
+	You can view the live demo via this link on my blog page
+	https://thelastcodebender.com/voucher
