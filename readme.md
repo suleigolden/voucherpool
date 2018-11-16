@@ -3,7 +3,7 @@
 
 ## Description
 
-This is PHP development task for VanHack. It is developed using Laravel 5.6, Bootstrap and Javascript.
+This project is developed using Laravel 5.6, Bootstrap and Javascript.
 
 
 ## Installation
